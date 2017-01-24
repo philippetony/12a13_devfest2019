@@ -1,0 +1,7 @@
+.reveal .slides section .fragment.highlight-orange {
+	opacity: 1;
+visibility: inherit; }
+
+.reveal .slides section .fragment.highlight-orange.visible {
+color: #f17e00; }
+

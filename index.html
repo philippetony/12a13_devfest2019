@@ -7,6 +7,7 @@
 		<title>DevFest Nantes 2016 - Retour sur Flexbox & GraphQL vs. Falcor</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/softeam.css">
 		<link rel="stylesheet" href="css/theme/black-roboto.css">
 
 		<!-- Theme used for syntax highlighting of code -->
@@ -26,7 +27,7 @@
 		display:flex; flex-direction:column; min-height:60vh;
 	}
 	.container{
-		flex:1; display:flex; flex-direction:column; 
+		flex:1; display:flex; flex-direction:column; font-size: 4vh !important;
 	}
 	.source {
 		display:flex;
@@ -46,7 +47,9 @@
 <section>
 	<h3>Retour sur </h3>
 	<img data-src="logo-devfest.png"/>
-	<p> 9 &amp; 10 novembre 2016</p>	
+	<p> 9 &amp; 10 novembre 2016</p>
+	<img src="Screenshot_20170122_231047.png" style="width:30vw;"/>
+<img src="Screenshot_20170124_212824.png" style="width:30vw;"/>
 </section>
 
 <!-- FLEXBOX -->
@@ -65,16 +68,51 @@
 <p class="fragment"> Ensemble de propriétés <strong>CSS</strong> faites par le W3C</li>
 <p> <span class="fragment">Candidate recommandation (<strong>2012</strong>)</span><br/><span class="fragment"> → Last Call Working Draft (2014) </span><br/><span class="fragment">→ Candidate Recommandation (<strong>2016</strong>)</span></p>
 </section>
-<section data-markdown><h3>A quoi ça sert ?</h3>
-<script type="text/template">
-## A quoi ça sert ?
-
-- Distribution<!-- .element: class="fragment" -->
-- Ordonnancement<!-- .element: class="fragment" -->
-- Alignement<!-- .element: class="fragment" -->
-- Flexibilité<!-- .element: class="fragment" -->
-
-</script>
+<section><h3>A quoi ça sert ?</h3>
+<div style="display:flex;" class="fragment">
+<p>Distribution</p>
+		<div class="container" style="max-width:40vw; margin-left: auto; margin-right:auto;">
+			<div class="white" style="display:flex;">
+				<div class="yellow">A</div>
+				<div class="red">B</div>
+				<div class="green">C</div>
+				<div class="blue" style="margin-left:auto;">D</div>
+			</div>
+		</div>	
+</div>
+<div style="display:flex;" class="fragment">
+<p>Ordonnacement</p>
+		<div class="container" style="max-width:40vw; margin-left: auto; margin-right:auto;">
+			<div class="white" style="display:flex;">
+				<div class="yellow" style="flex:1">A</div>
+				<div class="red" style="flex:1">B</div>
+				<div class="green" style="order:1; flex:1";>C</div>
+				<div class="blue" style="flex:1">D</div>
+			</div>
+		</div>	
+</div>
+<div style="display:flex;" class="fragment">
+<p>Alignement</p>
+		<div class="container" style="max-width:40vw; margin-left: auto; margin-right:auto; ">
+			<div class="white" style="display:flex;min-height:3em; justify-content:center; align-items:flex-end;">
+				<div class="yellow" style="align-self:flex-start;">A</div>
+				<div class="red">B</div>
+				<div class="green" style="order:1; align-self:center;";>C</div>
+				<div class="blue">D</div>
+			</div>
+		</div>	
+</div>
+<div style="display:flex;" class="fragment">
+<p>Flexibilité</p>
+		<div class="container" style="max-width:40vw; margin-left: auto; margin-right:auto;">
+			<div class="white" style="display:flex;">
+				<div class="yellow">A</div>
+				<div class="red" style="flex:1">B</div>
+				<div class="green" style="flex:2">C</div>
+				<div class="blue">D</div>
+			</div>
+		</div>	
+</div>
 </section>
 <section>
 	<h3>Vocabulaire</h3>
@@ -637,8 +675,8 @@
 	min-width: 750px;
 }
 	</pre>
-	<div style="display:flex; width:1000px; justify-content: space-between;"><div>←</div><div>1000px</div><div>→</div></div>
-	<div style="padding:5px; width:1000px; background-color: #999900; border: 4px solid white;">
+	<div style="display:flex; width:80vmin; justify-content: space-between;"><div>←</div><div>1000px</div><div>→</div></div>
+	<div style="padding:5px; width:80vmin; background-color: #999900; border: 4px solid white;">
 		<div style="background-color: yellow; width:250px; color:black;">&nbsp;???
 		</div>
 	</div>
@@ -653,12 +691,12 @@
 	min-width: 750px;
 }
 	</pre>
-	<div style="display:flex; width:1000px; justify-content: space-between;"><div>←</div><div>1000px</div><div>→</div></div>
-	<div style="padding:5px; width:1000px; background-color: #999900; display:flex; border: 4px solid white;">
-		<div style="background-color: yellow; width:250px; min-width:750px; flex-basis: 500px;">&nbsp;
+	<div style="display:flex; width:80vmin; justify-content: space-between;"><div>←</div><div>1000px</div><div>→</div></div>
+	<div style="padding:5px; width:80vmin; background-color: #999900; display:flex; border: 4px solid white;">
+		<div style="background-color: yellow; width: 60vmin; /*width:250px; min-width:750px; flex-basis: 500px;*/">&nbsp;
 		</div>
 	</div>
-	<div style="display:flex; width:750px; justify-content: space-between;"><div>←</div><div>750px</div><div>→</div></div>
+	<div style="display:flex; width:60vmin; justify-content: space-between;"><div>←</div><div>750px</div><div>→</div></div>
 </section>
 <section>
 	<h3>Ce qu'il fallait retenir</h3>
@@ -671,6 +709,120 @@
 	<p class="fragment">https://speakerdeck.com/goetter/flexrox</p>
 	<p class="fragment">https://speakerdeck.com/goetter/flexbox-place-a-la-gueule-de-bois</p>
 	<p class="fragment">https://github.com/philipwalton/flexbugs</p>
+</section>
+<section>
+</section>
+<!-- GraphQL vs Falcor -->
+<section>
+	<h3>GraphQL vs Falcor</h4><img src="Screenshot_20170124_212824.png"/>
+	<aside class="notes">https://speakerdeck.com/goetter/flexbox-place-a-la-gueule-de-bois</aside>
+</section>
+<section>
+	<h3>GraphQL vs Falcor vs Rest</h3>
+	<p class="fragment">Les deux technologies sont des concurents à <strong>REST</strong>.</p>
+	<p class="fragment">Requêtage efficace d'un serveur pour récupérer en <strong>une fois</strong> les données d'un serveur.</p>
+	<p class="fragment"><strong>Sélection</strong> des champs retournés</p>
+</section>
+<section>
+	<h3>GraphQL</h3>
+	<p class="fragment">Sponsor : <strong>Facebook</strong></p>
+	<p class="fragment">Langage de requête similaire à un « JSON à trou »</p>
+	<p class="fragment"><strong>Large</strong> adoption</p>
+	<p class="fragment">Déclaration de schéma à l'avance</p>
+	<p class="fragment">Auto-complétion pour les requêtes</p>
+</section>
+<section>
+	<h3>GraphQL</h3>
+	<div style="display:flex; align-items:center;">
+		<pre>
+{
+  hero {
+    name
+    # Queries can have comments!
+    friends {
+      name
+    }
+  }
+}
+		</pre>
+<div class="fragment" data-fragment-index="1">→</div>
+		<pre class="fragment" data-fragment-index="1">
+{
+  "data": {
+    "hero": {
+      "name": "R2-D2",
+      "friends": [
+        {
+          "name": "Luke Skywalker"
+        },
+        {
+          "name": "Han Solo"
+        },
+        {
+          "name": "Leia Organa"
+        }
+      ]
+    }
+  }
+}
+		</pre>
+</div>
+</section>
+<section>
+	<h3>Falcor</h3>
+	<p class="fragment">Sponsor : <strong>Netflix</strong></p>
+	<p class="fragment">Langage de requête : <strong>JSON standard</strong></p>
+	<p class="fragment">Faible adoption</p>
+	<p class="fragment">Librairie Client &amp; Serveur</p>
+	<p class="fragment"><strong>Cache</strong> côté client natif</p>
+</section>
+<section>
+	<h3>Falcor</h3>
+	<div style="display:flex; flex-direction:column; align-items:center;">
+<div style="display:flex; flex-direction: column; ">
+		<pre>
+["user.name", "user.surname", "user.address"]
+		</pre>
+<div>ou</div>
+		<pre>
+["user",["name","surname","address"]]
+		</pre>
+</div>
+<div class="fragment" data-fragment-index="1" >↓</div>
+		<pre class="fragment" data-fragment-index="1" style="flex: 1 1 auto; ">
+{
+  user: {
+    name: "Frank",
+    surname: "Underwood",
+    address: "1600 Pennsylvania Avenue
+	, Washington, DC"
+  }
+}
+		</pre>
+</div>
+</section>
+<section>
+<h3>Comparatif</h3>
+<div style="display:flex;min-height:40vh;">
+<div style="display:flex; flex-direction:column-reverse; align-items:flex-start;">
+	<div>-</div><div style="flex:1; -moz-transform: rotate(-90.0deg); -webkit-transform: rotate(-90.0deg); ">Clients<br/>distribués</div><div>+</div>
+</div>
+<div style="flex:1; display:flex; flex-direction:column; ">
+	<div class="white">REST</div>
+	<div style="flex:1; display: flex; flex-direction:initial; ">
+		<div style="flex:1;"class="white">Falcor</div>
+		<div style="flex:1;"class="white">GraphQL</div>
+	</div>
+	<div class="white">REST sauce RPC</div>
+	<div style="display:flex; flex-direction:row;">
+		<div>-</div><div style="flex:1;">Equipe distribuée</div><div>+</div>
+	</div>
+</div>
+</section>
+<section>
+<h1>Merci</h1>
+</section>
+<section>
 </section>
 			</div>
 		</div>
