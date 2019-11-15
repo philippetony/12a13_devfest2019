@@ -13,6 +13,8 @@
     <!-- Theme used for syntax highlighting of code -->
     <link rel="stylesheet" href="lib/css/zenburn.css" />
 
+    <script src="davidshimjs-qrcodejs-04f46c6/qrcode.min.js"></script>
+
     <!-- Printing and PDF exports -->
     <script>
       var link = document.createElement("link");
@@ -185,24 +187,31 @@
           <p>Twitter : <a href="https://twitter.com/Laoraw">@Laoraw</a></p>
         </section>
         <section>
-				<h2>Merci</h2	>
-				<div style="display:flex; flex-direction: row;">
-					<diV>	
-					<img style="border-radius: 50%; vertical-align: middle; margin:1em;" src='philippe.png'/>Philippe TONY<br/>Softeam Digital
-					</diV>
-					<p>Sources (slides) :
-						<img class="plain" src="sources.png"
-							style=" border: none; border: none; padding: 1em; " />
-					</p>
-
-				</div>
-			</section>
+          <h2>Merci</h2>
+          <div style="display:flex; flex-direction: row; align-content: space-between; align-items: center;">
+			<div style="display:flex; flex-direction: column; align-items: center; flex:1;">
+				<img style="border-radius: 50%; vertical-align: middle; margin:1em;" src="philippe.png" />
+				<p>Philippe TONY</p>
+				<p>Softeam Digital</p>
+			</div>
+            <div style="display:flex; flex-direction: column; align-items: center; flex:1;">
+              <p>
+                Slides :
+              </p>
+              <span id="qrcode" class="no-border"></span>
+              <script>
+                new QRCode(document.getElementById("qrcode"), {
+                  text: "https://github.com/philippetony/12a13_devfest2019"
+                });
+              </script>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
 
     <script src="lib/js/head.min.js"></script>
-	<script src="js/reveal.js"></script>
-	<script src="davidshimjs-qrcodejs-04f46c6/qrcode.min.js"></script>
+    <script src="js/reveal.js"></script>
 
     <script>
       // More info https://github.com/hakimel/reveal.js#configuration
