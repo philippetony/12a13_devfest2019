@@ -1,856 +1,231 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-		<title>DevFest Nantes 2016 - Retour sur Flexbox & GraphQL vs. Falcor</title>
+    <title>DevFest Nantes 2016 - Retour sur Flexbox & GraphQL vs. Falcor</title>
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/softeam.css">
-		<link rel="stylesheet" href="css/theme/black-roboto.css">
+    <link rel="stylesheet" href="css/reveal.css" />
+    <link rel="stylesheet" href="css/softeam.css" />
+    <link rel="stylesheet" href="css/theme/black-roboto.css" />
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css" />
 
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.type = "text/css";
+      link.href = window.location.search.match(/print-pdf/gi) ? "css/print/pdf.css" : "css/print/paper.css";
+      document.getElementsByTagName("head")[0].appendChild(link);
+    </script>
+    <style>
+      .split {
+        display: flex;
+        flex-direction: column;
+        min-height: 60vh;
+      }
+      .container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        font-size: 4vh !important;
+      }
+      .source {
+        display: flex;
+      }
+      .white {
+        border: 4px solid white !important;
+      }
+      .red {
+        border: 4px solid red !important;
+      }
+      .green {
+        border: 4px solid green !important;
+      }
+      .blue {
+        border: 4px solid blue !important;
+      }
+      .yellow {
+        border: 4px solid yellow !important;
+      }
+      .no-border {
+        border: none !important;
+      }
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-<style>
-	.split{
-		display:flex; flex-direction:column; min-height:60vh;
-	}
-	.container{
-		flex:1; display:flex; flex-direction:column; font-size: 4vh !important;
-	}
-	.source {
-		display:flex;
-	}
-	.white { border: 4px solid white !important; }
-	.red { border:4px solid red !important; }
-	.green { border:4px solid green !important; }
-	.blue { border:4px solid blue !important; }
-	.yellow { border:4px solid yellow !important; }
-	
-	strong{ color: #f17e00;}
-</style>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-<section>
-	<h3>Retour sur </h3>
-	<img data-src="logo-devfest.png"/>
-	<p> 9 &amp; 10 novembre 2016</p>
-	<img src="Screenshot_20170122_231047.png" style="width:30vw;"/>
-<img src="Screenshot_20170124_212824.png" style="width:30vw;"/>
-</section>
+      strong {
+        color: #f17e00;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-transition="fade-out">
+          <h3>Retour sur</h3>
+          <img data-src="logo-devfest.png" />
+          <p>21 &amp; 22 octobre 2019</p>
+          <img src="2019-11-15_09-07.png" style="height:30vh;" />
+          <img src="2019-11-15_09-08.png" style="height:30vh;" />
+        </section>
 
-<!-- FLEXBOX -->
-<section>
-	<h3>Flexbox</h3><h4>après l'ivresse, place à la gueule de bois !</h4><img src="Screenshot_20170122_231047.png"/>
-	<aside class="notes">https://speakerdeck.com/goetter/flexbox-place-a-la-gueule-de-bois</aside>
-</section>
-<section>
-	<h2>Le contexte de la conférence</h2>
-	<p class="fragment"><strong>2</strong> conférences (pour le prix d'une) :</p>
-	<p class="fragment">DevFest <strong>2015</strong> : <br/>Flexbox</p>
-	<p class="fragment">DevFest <strong>2016</strong> : <br/> Flexbox : après l'ivresse place à la gueule de bois</p>
-</section>
-<section>
-<h2>Qu'est ce que Flexbox ?</h2>
-<p class="fragment"> Ensemble de propriétés <strong>CSS</strong> faites par le W3C</li>
-<p> <span class="fragment">Candidate recommandation (<strong>2012</strong>)</span><br/><span class="fragment"> → Last Call Working Draft (2014) </span><br/><span class="fragment">→ Candidate Recommandation (<strong>2016</strong>)</span></p>
-</section>
-<section><h3>A quoi ça sert ?</h3>
-<div style="display:flex;" class="fragment">
-<p>Distribution</p>
-		<div class="container" style="max-width:40vw; margin-left: auto; margin-right:auto;">
-			<div class="white" style="display:flex;">
-				<div class="yellow">A</div>
-				<div class="red">B</div>
-				<div class="green">C</div>
-				<div class="blue" style="margin-left:auto;">D</div>
-			</div>
-		</div>	
-</div>
-<div style="display:flex;" class="fragment">
-<p>Ordonnacement</p>
-		<div class="container" style="max-width:40vw; margin-left: auto; margin-right:auto;">
-			<div class="white" style="display:flex;">
-				<div class="yellow" style="flex:1">A</div>
-				<div class="red" style="flex:1">B</div>
-				<div class="green" style="order:1; flex:1";>C</div>
-				<div class="blue" style="flex:1">D</div>
-			</div>
-		</div>	
-</div>
-<div style="display:flex;" class="fragment">
-<p>Alignement</p>
-		<div class="container" style="max-width:40vw; margin-left: auto; margin-right:auto; ">
-			<div class="white" style="display:flex;min-height:3em; justify-content:center; align-items:flex-end;">
-				<div class="yellow" style="align-self:flex-start;">A</div>
-				<div class="red">B</div>
-				<div class="green" style="order:1; align-self:center;";>C</div>
-				<div class="blue">D</div>
-			</div>
-		</div>	
-</div>
-<div style="display:flex;" class="fragment">
-<p>Flexibilité</p>
-		<div class="container" style="max-width:40vw; margin-left: auto; margin-right:auto;">
-			<div class="white" style="display:flex;">
-				<div class="yellow">A</div>
-				<div class="red" style="flex:1">B</div>
-				<div class="green" style="flex:2">C</div>
-				<div class="blue">D</div>
-			</div>
-		</div>	
-</div>
-</section>
-<section>
-	<h3>Vocabulaire</h3>
-	<p class="fragment">Un élément avec <em>display: flex;</em> est un flex-<strong>container</strong></p>
-	<p class="fragment">Ses fils sont des flex-<strong>items</strong></p>
-</section>
-<section>
-	<h3>Les propriétés du flex-container (1/2)</h3>
-	<p class="fragment"><em>display</em> : valorisé à "flex"</p>
-	<p class="fragment"><em>flex-direction</em> : définit l'<strong>axe principal</strong> horizontal (row) ou vertical (column)</p>
-	<p class="fragment"><em>justify-content</em>: alignement des items sur l'axe principal</p>
-	<p class="fragment"><em>align-items</em> : alignement des items sur l'axe secondaire</p>
-</section>
-<section>
-	<h3>Les propriétés du flex-container (2/2)</h3>
-	<p class="fragment"><em>flex-wrap</em> : autorise le <strong>retour à la ligne</strong> des items qui dépassent (sur l'axe principal)</p>
-	<p class="fragment"><em>align-content</em> : alignement des lignes d'items sur l'axe principal en cas de flex-wrap</p>
-</section>
-<section>
-	<h3>Les propriétés du flex-item</h3>
-	<p class="fragment"><em>flex-grow </em>: autorise à <strong>grandir</strong> sur l'axe</p>
-	<p class="fragment"><em>flex-shrink</em> : autorise à <strong>rapetisser</strong> sur l'axe</p>
-	<p class="fragment"><em>flex-basis</em> : taille de référence</p>
-	<p class="fragment"><em>align-self</em>: alignement de l'element en particulier sur l'axe perpendiculaire</p>
-	<p class="fragment"><em>order</em> : définit l'<strong>ordre</strong> de l'élément dans le container</p>
-</section>
-<section>
-	<h3>Les propriétés du flex-item (combo)</h3>
-	<p class="fragment"><em>flex</em>: raccourcis pour flex-grow, flex-shrink, flex-basis</p>
-	<p class="fragment"><em>flex: 1;</em> == flex:1 1 0;</p>
-</section>
-<section>
-<!-- debut demo -->
-<section data-transition="fade">
-	<h3>Exemple</h3>
-	<div class="split">
-		<div class="container">
-			<div class="white">
-				<div class="yellow">Armorique</div>
-				<div class="red">Carnivore</div>
-				<div class="green">Complet Poulet</div>
-				<div class="blue">Vendéen</div>
-			</div>
-		</div>	
-		<div class="source">
-			<pre style="flex:1;">
-&lt;div class="container"&gt;
-	&lt;div class="armorique"&gt;Armorique&lt;/div&gt;
-	&lt;div class="carnivore"&gt;Carnivore&lt;/div&gt;
-	&lt;div class="complet"&gt;Complet Poulet&lt;/div&gt;
-	&lt;div class="vendeen"&gt;Vendéen&lt;/div&gt;
-&lt;/div&gt;
-			</pre>
-		</div>
-	</div>	
-</section>
-<section data-transition="fade">
-	<h3>Exemple</h3>
-	<div class="split">
-		<div class="container">
-			<div class="white">
-				<div class="yellow">Armorique</div>
-				<div class="red">Carnivore</div>
-				<div class="green">Complet Poulet</div>
-				<div class="blue">Vendéen</div>
-			</div>
-		</div>	
-		<div class="source">
-			<pre>
-.container {
-}
-			</pre>
-		</div>
-	</div>	
-</section>
-<section data-transition="fade">
-	<h3>Exemple</h3>
-	<div class="split">
-		<div class="container">
-			<div class="white" style="display:flex;">
-				<div class="yellow">Armorique</div>
-				<div class="red">Carnivore</div>
-				<div class="green">Complet Poulet</div>
-				<div class="blue">Vendéen</div>
-			</div>
-		</div>	
-		<div class="source">
-			<pre>
-.container {
-	display:flex;
-}
-			</pre>
-		</div>
-	</div>	
-</section>
-<section data-transition="fade">
-	<h3>Exemple</h3>
-	<div class="split">
-		<div class="container">
-			<div class="white" style="display:flex; flex-direction:column;">
-				<div class="yellow">Armorique</div>
-				<div class="red">Carnivore</div>
-				<div class="green">Complet Poulet</div>
-				<div class="blue">Vendéen</div>
-			</div>
-		</div>	
-		<div class="source">
-			<pre>
-.container {
-	display:flex;
-	flex-direction: column;
-}
-			</pre>
-		</div>
-	</div>	
-</section>
-<section data-transition="fade">
-	<h3>Exemple</h3>
-	<div class="split">
-		<div class="container">
-			<div class="white" style="display:flex; flex-direction:row;">
-				<div class="yellow">Armorique</div>
-				<div class="red">Carnivore</div>
-				<div class="green">Complet Poulet</div>
-				<div class="blue">Vendéen</div>
-			</div>
-		</div>	
-		<div class="source">
-			<pre>
-.container {
-	display:flex;
-	flex-direction: row;
-}
-			</pre>
-		</div>
-	</div>	
-</section>
-<section data-transition="fade">
-	<h3>Exemple</h3>
-	<div class="split">
-		<div class="container">
-			<div class="white" style="display:flex;">
-				<div class="yellow">Armorique</div>
-				<div class="red">Carnivore</div>
-				<div class="green">Complet Poulet</div>
-				<div class="blue">Vendéen</div>
-			</div>
-		</div>	
-		<div class="source">
-			<pre>
-.container {
-	display:flex;
-}
-			</pre>
-		</div>
-	</div>	
-</section>
-<section data-transition="fade">
-	<h3>Exemple</h3>
-	<div class="split">
-		<div class="container">
-			<div class="white" style="display:flex; justify-content:flex-end;">
-				<div class="yellow">Armorique</div>
-				<div class="red">Carnivore</div>
-				<div class="green">Complet Poulet</div>
-				<div class="blue">Vendéen</div>
-			</div>
-		</div>	
-		<div class="source">
-			<pre>
-.container {
-	display:flex;
-	justify-content:flex-end;
-}
-			</pre>
-		</div>
-	</div>	
-</section>
-<section data-transition="fade">
-	<h3>Exemple</h3>
-	<div class="split">
-		<div class="container">
-			<div class="white" style="display:flex; justify-content: space-between;">
-				<div class="yellow">Armorique</div>
-				<div class="red">Carnivore</div>
-				<div class="green">Complet Poulet</div>
-				<div class="blue">Vendéen</div>
-			</div>
-		</div>	
-		<div class="source">
-			<pre>
-.container {
-	display:flex;
-	justify-content: space-between;
-}
-			</pre>
-		</div>
-	</div>	
-</section>
-<section data-transition="fade">
-	<h3>Exemple</h3>
-	<div class="split">
-		<div class="container">
-			<div class="white" style="display:flex;">
-				<div class="yellow">Armorique</div>
-				<div class="red">Carnivore</div>
-				<div class="green">Complet Poulet</div>
-				<div class="blue">Vendéen</div>
-			</div>
-		</div>	
-		<div class="source">
-			<pre>
-.container {
-	display:flex;
-}
-			</pre>
-		</div>
-	</div>	
-</section>
-<section data-transition="fade">
-	<h3>Exemple</h3>
-	<div class="split">
-		<div class="container">
-			<div class="white" style="display:flex;">
-				<div class="yellow">Armorique</div>
-				<div class="red" style="flex:1;">Carnivore</div>
-				<div class="green">Complet Poulet</div>
-				<div class="blue">Vendéen</div>
-			</div>
-		</div>	
-		<div class="source">
-			<pre>
-.container {
-	display:flex;
-}
-			</pre>
-			<pre>
-.carnivore {
-	flex:1;
-}
-			</pre>
-		</div>
-	</div>	
-</section>
-<section data-transition="fade">
-	<h3>Exemple</h3>
-	<div class="split">
-		<div class="container">
-			<div class="white" style="display:flex;">
-				<div class="yellow">Armorique</div>
-				<div class="red" style="flex:1;">Carnivore</div>
-				<div class="green">Complet Poulet</div>
-				<div class="blue" style="flex:1;">Vendéen</div>
-			</div>
-		</div>	
-		<div class="source">
-			<pre>
-.container {
-	display:flex;
-}
-			</pre>
-			<pre>
-.carnivore {
-	flex:1;
-}
-			</pre>
-			<pre>
-.vendeen {
-	flex:1;
-}
-			</pre>
-		</div>
-	</div>	
-</section>
-<section data-transition="fade">
-	<h3>Exemple</h3>
-	<div class="split">
-		<div class="container">
-			<div class="white" style="display:flex;">
-				<div class="yellow">Armorique</div>
-				<div class="red">Carnivore</div>
-				<div class="green">Complet Poulet</div>
-				<div class="blue">Vendéen</div>
-			</div>
-		</div>	
-		<div class="source">
-			<pre>
-.container {
-	display:flex;
-}
-			</pre>
-		</div>
-	</div>	
-</section>
-<section data-transition="fade">
-	<h3>Exemple</h3>
-	<div class="split">
-		<div class="container">
-			<div class="white" style="display:flex;">
-				<div class="yellow">Armorique</div>
-				<div class="red" style="order:1;">Carnivore</div>
-				<div class="green">Complet Poulet</div>
-				<div class="blue">Vendéen</div>
-			</div>
-		</div>	
-		<div class="source">
-			<pre>
-.container {
-	display:flex;
-}
-			</pre>
-			<pre>
-.carnivore {
-	order:1;
-}
-			</pre>
-		</div>
-	</div>	
-</section>
-<section data-transition="fade">
-	<h3>Exemple</h3>
-	<div class="split">
-		<div class="container">
-			<div class="white" style="display:flex;">
-				<div class="yellow">Armorique</div>
-				<div class="red" style="order:-1;">Carnivore</div>
-				<div class="green">Complet Poulet</div>
-				<div class="blue">Vendéen</div>
-			</div>
-		</div>	
-		<div class="source">
-			<pre>
-.container {
-	display:flex;
-}
-			</pre>
-			<pre>
-.carnivore {
-	order:-1;
-}
-			</pre>
-		</div>
-	</div>	
-</section>
-<section data-transition="fade">
-	<h3>Exemple</h3>
-	<div class="split">
-		<div class="container">
-			<div class="white" style="display:flex;">
-				<div class="yellow">Armorique</div>
-				<div class="red">Carnivore</div>
-				<div class="green">Complet Poulet</div>
-				<div class="blue">Vendéen</div>
-			</div>
-		</div>	
-		<div class="source">
-			<pre>
-.container {
-	display:flex;
-}
-			</pre>
-		</div>
-	</div>	
-</section>
-<section data-transition="fade">
-	<h3>Exemple</h3>
-	<div class="split">
-		<div class="container">
-			<div class="white" style="display:flex; width:60%;">
-				<div class="yellow">Armorique</div>
-				<div class="red">Carnivore</div>
-				<div class="green">Complet Poulet</div>
-				<div class="blue">Vendéen</div>
-			</div>
-		</div>	
-		<div class="source">
-			<pre>
-.container {
-	display:flex;
-	width:60%;
-}
-			</pre>
-		</div>
-	</div>	
-</section>
-<section data-transition="fade">
-	<h3>Exemple</h3>
-	<div class="split">
-		<div class="container">
-			<div class="white" style="display:flex; width:60%; flex-wrap: wrap;">
-				<div class="yellow">Armorique</div>
-				<div class="red">Carnivore</div>
-				<div class="green">Complet Poulet</div>
-				<div class="blue">Vendéen</div>
-			</div>
-		</div>	
-		<div class="source">
-			<pre>
-.container {
-	display:flex;
-	width:60%;
-	flex-wrap: wrap;
-}
-			</pre>
-		</div>
-	</div>	
-</section>
-<section data-transition="fade">
-	<h3>Exemple</h3>
-	<div class="split">
-		<div class="container">
-			<div class="white" style="display:flex; min-height:300px;">
-				<div class="yellow">Armorique</div>
-				<div class="red">Carnivore</div>
-				<div class="green">Complet Poulet</div>
-				<div class="blue">Vendéen</div>
-			</div>
-		</div>	
-		<div class="source">
-			<pre>
-.container {
-	display:flex;
-	min-height:300px;
-}
-			</pre>
-		</div>
-	</div>	
-</section>
-<section data-transition="fade">
-	<h3>Exemple</h3>
-	<div class="split">
-		<div class="container">
-			<div class="white" style="display:flex; min-height:300px; align-items:flex-start;">
-				<div class="yellow">Armorique</div>
-				<div class="red">Carnivore</div>
-				<div class="green">Complet Poulet</div>
-				<div class="blue">Vendéen</div>
-			</div>
-		</div>	
-		<div class="source">
-			<pre>
-.container {
-	display:flex;
-	min-height:300px;
-	align-items: flex-start;
-}
-			</pre>
-		</div>
-	</div>	
-</section>
-<section data-transition="fade">
-	<h3>Exemple</h3>
-	<div class="split">
-		<div class="container">
-			<div class="white" style="display:flex; min-height:300px; align-items:flex-end;">
-				<div class="yellow">Armorique</div>
-				<div class="red">Carnivore</div>
-				<div class="green">Complet Poulet</div>
-				<div class="blue">Vendéen</div>
-			</div>
-		</div>	
-		<div class="source">
-			<pre>
-.container {
-	display:flex;
-	min-height:300px;
-	align-items: flex-end;
-}
-			</pre>
-		</div>
-	</div>	
-</section>
-<section data-transition="fade">
-	<h3>Exemple</h3>
-	<div class="split">
-		<div class="container">
-			<div class="white" style="display:flex; min-height:300px; align-items:center;">
-				<div class="yellow">Armorique</div>
-				<div class="red">Carnivore</div>
-				<div class="green">Complet Poulet</div>
-				<div class="blue">Vendéen</div>
-			</div>
-		</div>	
-		<div class="source">
-			<pre>
-.container {
-	display:flex;
-	min-height:300px;
-	align-items: center;
-}
-			</pre>
-		</div>
-	</div>	
-</section>
-<section data-transition="fade">
-	<h3>Exemple</h3>
-	<div class="split">
-		<div class="container">
-			<div class="white" style="display:flex; min-height:300px; align-items:center; flex-direction:column;">
-				<div class="yellow">Armorique</div>
-				<div class="red">Carnivore</div>
-				<div class="green">Complet Poulet</div>
-				<div class="blue">Vendéen</div>
-			</div>
-		</div>	
-		<div class="source">
-			<pre>
-.container {
-	display:flex;
-	min-height:300px;
-	align-items: center;
-	flex-direction: column;
-}
-			</pre>
-		</div>
-	</div>	
-</section>
-<!-- fin demo -->
-</section>
-<section>
-	<h3>Les problèmes</h3>
-	<img src="architecture.jpg"/>
-	<font size="1">
-		Source : <a href='https://twitter.com/neonick'>Nick Marchenko (Twitter) </a></font>
-</section>
-<section>
-	<h3>Les problèmes</h3>
-	<img class="stretch" src="priorites_flex.png"/>
-</section>
-<section>
-	<h3>Les problèmes</h3>
-	<pre>
-.flex-item {
-	flex-basis: 500px;
-	width: 250px;
-}
-	</pre>
-	<p>Qui gagne ?</p>
-	<p class="fragment">flex-basis</p>
-</section>
-<section>
-	<h3>Les règles</h3>
-	<p>Du plus prioritaire au moins prioritaire</p>
-	<ul>
-		<li>min-width</li>
-		<li>max-width</li>
-		<li>flex-wrap</li>
-		<li>flex-grow | flex-shrink</li>
-		<li>flex-basis: valeur;</li>
-		<li>width: valeur;</li>
-		<li>flex-basis: auto;</li>
-	</ul>
-</section>
-<section data-transition="fade-out">
-	<h3>Question piège</h3>
-	<pre>
-.flex-item {
-	flex-basis: 500px;
-	width: 250px;
-	min-width: 750px;
-}
-	</pre>
-	<div style="display:flex; width:80vmin; justify-content: space-between;"><div>←</div><div>1000px</div><div>→</div></div>
-	<div style="padding:5px; width:80vmin; background-color: #999900; border: 4px solid white;">
-		<div style="background-color: yellow; width:250px; color:black;">&nbsp;???
-		</div>
-	</div>
-	<div style="visibility:hidden; display:flex; width:750px; justify-content: space-between;"><div>←</div><div>750px</div><div>→</div></div>
-</section>
-<section data-transition="fade-in">
-	<h3>Question piège</h3>
-	<pre>
-.flex-item {
-	flex-basis: 500px;
-	width: 250px;
-	min-width: 750px;
-}
-	</pre>
-	<div style="display:flex; width:80vmin; justify-content: space-between;"><div>←</div><div>1000px</div><div>→</div></div>
-	<div style="padding:5px; width:80vmin; background-color: #999900; display:flex; border: 4px solid white;">
-		<div style="background-color: yellow; width: 60vmin; /*width:250px; min-width:750px; flex-basis: 500px;*/">&nbsp;
-		</div>
-	</div>
-	<div style="display:flex; width:60vmin; justify-content: space-between;"><div>←</div><div>750px</div><div>→</div></div>
-</section>
-<section>
-	<h3>Ce qu'il fallait retenir</h3>
-	<p class="fragment">Flexbox c'est <strong>bien</strong></p>
-	<p class="fragment"><strong>Simplifie</strong> plein de choses difficiles à mettre en page sans flexbox</p>
-	<p class="fragment">Couplé à des règles @media pour la taille d'écran <span class="fragment">→ Mise en page <strong>adaptative</strong> en fonction de la taille d'écran </span><span class="fragment">(mobile, tablette, desktop avec une seule page et un seul DOM).</span></p>
-</section>
-<section>
-	<h3>Les liens pour approfondir la question</h3>
-	<p class="fragment">https://speakerdeck.com/goetter/flexrox</p>
-	<p class="fragment">https://speakerdeck.com/goetter/flexbox-place-a-la-gueule-de-bois</p>
-	<p class="fragment">https://github.com/philipwalton/flexbugs</p>
-</section>
-<section>
-</section>
-<!-- GraphQL vs Falcor -->
-<section>
-	<h3>GraphQL vs Falcor</h4><img src="Screenshot_20170124_212824.png"/>
-	<aside class="notes">https://speakerdeck.com/goetter/flexbox-place-a-la-gueule-de-bois</aside>
-</section>
-<section>
-	<h3>GraphQL vs Falcor vs Rest</h3>
-	<p class="fragment">Les deux technologies sont des concurents à <strong>REST</strong>.</p>
-	<p class="fragment">Requêtage efficace d'un serveur pour récupérer en <strong>une fois</strong> les données d'un serveur.</p>
-	<p class="fragment"><strong>Sélection</strong> des champs retournés</p>
-</section>
-<section>
-	<h3>GraphQL</h3>
-	<p class="fragment">Sponsor : <strong>Facebook</strong></p>
-	<p class="fragment">Langage de requête similaire à un « JSON à trou »</p>
-	<p class="fragment"><strong>Large</strong> adoption</p>
-	<p class="fragment">Déclaration de schéma à l'avance</p>
-	<p class="fragment">Auto-complétion pour les requêtes</p>
-</section>
-<section>
-	<h3>GraphQL</h3>
-	<div style="display:flex; align-items:center;">
-		<pre>
-{
-  hero {
-    name
-    # Queries can have comments!
-    friends {
-      name
-    }
-  }
-}
-		</pre>
-<div class="fragment" data-fragment-index="1">→</div>
-		<pre class="fragment" data-fragment-index="1">
-{
-  "data": {
-    "hero": {
-      "name": "R2-D2",
-      "friends": [
-        {
-          "name": "Luke Skywalker"
-        },
-        {
-          "name": "Han Solo"
-        },
-        {
-          "name": "Leia Organa"
-        }
-      ]
-    }
-  }
-}
-		</pre>
-</div>
-</section>
-<section>
-	<h3>Falcor</h3>
-	<p class="fragment">Sponsor : <strong>Netflix</strong></p>
-	<p class="fragment">Langage de requête : <strong>JSON standard</strong></p>
-	<p class="fragment">Faible adoption</p>
-	<p class="fragment">Librairie Client &amp; Serveur</p>
-	<p class="fragment"><strong>Cache</strong> côté client natif</p>
-</section>
-<section>
-	<h3>Falcor</h3>
-	<div style="display:flex; flex-direction:column; align-items:center;">
-<div style="display:flex; flex-direction: column; ">
-		<pre>
-["user.name", "user.surname", "user.address"]
-		</pre>
-<div>ou</div>
-		<pre>
-["user",["name","surname","address"]]
-		</pre>
-</div>
-<div class="fragment" data-fragment-index="1" >↓</div>
-		<pre class="fragment" data-fragment-index="1" style="flex: 1 1 auto; ">
-{
-  user: {
-    name: "Frank",
-    surname: "Underwood",
-    address: "1600 Pennsylvania Avenue
-	, Washington, DC"
-  }
-}
-		</pre>
-</div>
-</section>
-<section>
-<h3>Comparatif</h3>
-<div style="display:flex;min-height:40vh;">
-<div style="display:flex; flex-direction:column-reverse; align-items:flex-start;">
-	<div>-</div><div style="flex:1; -moz-transform: rotate(-90.0deg); -webkit-transform: rotate(-90.0deg); ">Clients<br/>distribués</div><div>+</div>
-</div>
-<div style="flex:1; display:flex; flex-direction:column; ">
-	<div class="white">REST</div>
-	<div style="flex:1; display: flex; flex-direction:initial; ">
-		<div style="flex:1;"class="white">Falcor</div>
-		<div style="flex:1;"class="white">GraphQL</div>
-	</div>
-	<div class="white">REST sauce RPC</div>
-	<div style="display:flex; flex-direction:row;">
-		<div>-</div><div style="flex:1;">Equipe distribuée</div><div>+</div>
-	</div>
-</div>
-</section>
-<section>
-	<h3>Approfondir le sujet</h3>
-	<p>https://www.youtube.com/watch?v=HJuOC2WFNDs</p>
-</section>
-<section>
-<h1>Merci</h1>
-</section>
-<section>
-</section>
-			</div>
-		</div>
+        <!-- Daltonisme -->
+        <section data-transition="fade-in">
+          <h3>Au dela des couleurs.</h3>
+          <h4>Des interfaces adaptées au daltonisme.</h4>
+          <p>Laura Wacrenier</p>
+          <p>UX Designer @SonarSource</p>
+          <img src="2019-11-15_09-07.png" />
+          <aside class="notes">
+            https://speakerdeck.com/goetter/flexbox-place-a-la-gueule-de-bois
+          </aside>
+        </section>
+        <section>
+          <h3>SonarQube</h3>
+          <ul>
+            <li class="fragment" data-fragment-index="1">
+              Utilisation forte du <span style="color:red;">rouge</span> et du
+              <span style="color:green;">vert</span>
+            </li>
+            <li class="fragment" data-fragment-index="2">
+              Nombre de dashboards importants
+            </li>
+            <li class="fragment" data-fragment-index="3">
+              Graphiques avec uniquement la couleus
+            </li>
+            <li class="fragment" data-fragment-index="4">
+              MapView avec uniquement les couleurs
+            </li>
+          </ul>
+          <div style="display: flex; flex-direction: row; align-content: space-between;">
+            <img style="height: 30vh;" class="fragment" data-fragment-index="3" src="dashboards.png" />
+            <img style="height: 30vh;" class="fragment" data-fragment-index="4" src="mapview.png" />
+          </div>
+        </section>
+        <section data-transition="fade-out">
+          <h3>Métier de développeur</h3>
+          <img class="no-border" src="coverage1.png" />
+        </section>
+        <section data-transition="fade-in">
+          <h3>Métier de développeur daltonien</h3>
+          <img class="no-border" src="coverage2.png" />
+        </section>
+        <section>
+          <h3>Métier de développeur</h3>
+          <ul>
+            <li>
+              <span class="fragment">8%</span>
+              <span class="fragment">des hommes</span>
+              <span class="fragment">caucasiens</span>
+            </li>
+            <li class="fragment">Seulement 0,5% des femmes</li>
+            <li class="fragment">Lié au chromosome X</li>
+            <li class="fragment">"On sait tous qu'il y voit rien ..."</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Types de daltonismes</h3>
+          <p>Lié aux cones</p>
+          <p>
+            <span style="color:red">Rouge</span>
+            <span style="color:green">Vert</span>
+            <span style="color:blue">Bleu</span>
+          </p>
+          <p class="fragment">Le plus courant touche le cône vert (Deuteranopie)</p>
+        </section>
+        <section>
+          <h3>Bonnes pratiques</h3>
+          <ul>
+            <li class="fragment">WCAG : guide pour l'accessibilité des contenus web</li>
+            <li class="fragment">Contrastes : AA minimum</li>
+            <li class="fragment">Outils : Devtools Chrome &amp;&amp; Firefox (onglet accessibilité)</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Bonnes pratiques</h3>
+          <ul>
+            <li class="fragment">Ne pas se reposer seulement sur les couleurs</li>
+            <li class="fragment">
+              Exemple : e-commerce, choix des couleurs
+              <span class="fragment"> (Ajouter un nom parlant de la couleur) </span>
+            </li>
+            <li class="fragment">Souligner les liens</li>
+            <li class="fragment">Mode spéciaux (si besoin)</li>
+            <li class="fragment">Il faudrait que ça soit accessible par défaut</li>
+          </ul>
+        </section>
+        <section>
+          <p class="fragment">
+            « Jamais personne ne s'est plaint qu'un site-web était trop facile à lire »
+          </p>
+          <p class="fragment">« Tout le monde vieillit »</p>
+          <p class="fragment">« Peu de retraités qui codent avec SonarQube »</p>
+        </section>
+        <section>
+          <h3>Par où on commence</h3>
+          <p class="fragment">« Consider it as a bug »</p>
+          <p class="fragment">Traité au fil de l'eau</p>
+          <p class="fragment">
+            Faire des tickets détaillés et facile à traiter (quick win)
+          </p>
+          <p class="fragment">Retours utilisateurs à diffuser dans l'équipe</p>
+        </section>
+        <section>
+          <h3>Approfondir le sujet</h3>
+          <p>
+            Slides :
+            <a href="https://drive.google.com/file/d/1IUtL_4KIRtLPfuTKsYxjcWHAftXPXd6L/view">https://drive.google.com/file/d/1IUtL_4KIRtLPfuTKsYxjcWHAftXPXd6L/view</a>
+          </p>
+          <p>
+            Vidéo :
+            <a href="https://www.youtube.com/watch?v=29EpQDs0Td8">https://www.youtube.com/watch?v=29EpQDs0Td8</a>
+          </p>
+          <p>Twitter : <a href="https://twitter.com/Laoraw">@Laoraw</a></p>
+        </section>
+        <section>
+				<h2>Merci</h2	>
+				<div style="display:flex; flex-direction: row;">
+					<diV>	
+					<img style="border-radius: 50%; vertical-align: middle; margin:1em;" src='philippe.png'/>Philippe TONY<br/>Softeam Digital
+					</diV>
+					<p>Sources (slides) :
+						<img class="plain" src="sources.png"
+							style=" border: none; border: none; padding: 1em; " />
+					</p>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+				</div>
+			</section>
+      </div>
+    </div>
 
-		<script>
-			// More info https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				history: true,
-				controls: false,
-				progress: true,
-				mouseWheel: true,
+    <script src="lib/js/head.min.js"></script>
+	<script src="js/reveal.js"></script>
+	<script src="davidshimjs-qrcodejs-04f46c6/qrcode.min.js"></script>
 
+    <script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        history: true,
+        controls: false,
+        progress: true,
+        mouseWheel: true,
 
-				// More info https://github.com/hakimel/reveal.js#dependencies
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
-			});
-		</script>
-	</body>
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          { src: "plugin/markdown/marked.js" },
+          { src: "plugin/markdown/markdown.js" },
+          { src: "plugin/notes/notes.js", async: true },
+          {
+            src: "plugin/highlight/highlight.js",
+            async: true,
+            callback: function() {
+              hljs.initHighlightingOnLoad();
+            }
+          }
+        ]
+      });
+    </script>
+  </body>
 </html>
