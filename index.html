@@ -15,6 +15,20 @@
 
     <script src="davidshimjs-qrcodejs-04f46c6/qrcode.min.js"></script>
 
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/fontawesome.css"
+      integrity="sha256-YC896To53D/eet6K3jAwOq67iCIK24u2Hg6CQ+026I8="
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/brands.css"
+      integrity="sha256-hIzRfkDG8yoX/o/xO8mmqvlHMAOHQsUetvMFu3Fa/vY="
+      crossorigin="anonymous"
+    />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
     <!-- Printing and PDF exports -->
     <script>
       var link = document.createElement("link");
@@ -59,6 +73,64 @@
 
       strong {
         color: #f17e00;
+      }
+
+      .fire {
+        animation: animation 1s ease-in-out infinite alternate;
+        -moz-animation: animation 1s ease-in-out infinite alternate;
+        -webkit-animation: animation 1s ease-in-out infinite alternate;
+        -o-animation: animation 1s ease-in-out infinite alternate;
+      }
+
+      .burn {
+        animation: animation 0.65s ease-in-out infinite alternate;
+        -moz-animation: animation 0.65s ease-in-out infinite alternate;
+        -webkit-animation: animation 0.65s ease-in-out infinite alternate;
+        -o-animation: animation 0.65s ease-in-out infinite alternate;
+      }
+
+      @keyframes animation {
+        0% {
+          text-shadow: 0 0 20px #fefcc9, 10px -10px 30px #feec85, -20px -20px 40px #ffae34, 20px -40px 50px #ec760c, -20px -60px 60px #cd4606, 0 -80px 70px #973716,
+            10px -90px 80px #451b0e;
+        }
+        100% {
+          text-shadow: 0 0 20px #fefcc9, 10px -10px 30px #fefcc9, -20px -20px 40px #feec85, 22px -42px 60px #ffae34, -22px -58px 50px #ec760c, 0 -82px 80px #cd4606,
+            10px -90px 80px #973716;
+        }
+      }
+
+      @-moz-keyframes animation {
+        0% {
+          text-shadow: 0 0 20px #fefcc9, 10px -10px 30px #feec85, -20px -20px 40px #ffae34, 20px -40px 50px #ec760c, -20px -60px 60px #cd4606, 0 -80px 70px #973716,
+            10px -90px 80px #451b0e;
+        }
+        100% {
+          text-shadow: 0 0 20px #fefcc9, 10px -10px 30px #fefcc9, -20px -20px 40px #feec85, 22px -42px 60px #ffae34, -22px -58px 50px #ec760c, 0 -82px 80px #cd4606,
+            10px -90px 80px #973716;
+        }
+      }
+
+      @-webkit-keyframes animation {
+        0% {
+          text-shadow: 0 0 20px #fefcc9, 10px -10px 30px #feec85, -20px -20px 40px #ffae34, 20px -40px 50px #ec760c, -20px -60px 60px #cd4606, 0 -80px 70px #973716,
+            10px -90px 80px #451b0e;
+        }
+        100% {
+          text-shadow: 0 0 20px #fefcc9, 10px -10px 30px #fefcc9, -20px -20px 40px #feec85, 22px -42px 60px #ffae34, -22px -58px 50px #ec760c, 0 -82px 80px #cd4606,
+            10px -90px 80px #973716;
+        }
+      }
+
+      @-o-keyframes animation {
+        0% {
+          text-shadow: 0 0 20px #fefcc9, 10px -10px 30px #feec85, -20px -20px 40px #ffae34, 20px -40px 50px #ec760c, -20px -60px 60px #cd4606, 0 -80px 70px #973716,
+            10px -90px 80px #451b0e;
+        }
+        100% {
+          text-shadow: 0 0 20px #fefcc9, 10px -10px 30px #fefcc9, -20px -20px 40px #feec85, 22px -42px 60px #ffae34, -22px -58px 50px #ec760c, 0 -82px 80px #cd4606,
+            10px -90px 80px #973716;
+        }
       }
     </style>
   </head>
@@ -194,7 +266,94 @@
             <p><em>Alsacreations</em></p>
             <img src="2019-11-15_09-08.png" />
           </section>
+          <section>
+            <h2>Timeline</h2>
+            <img src="timeline_fonts.png" class="no-border" />
+          </section>
+          <section>
+            <h1>Comic Sans</h1>
+            <p class="fragment">1995</p>
+            <p class="fragment">Jugée infantile</p>
+            <p class="fragment">Utilisée un peu partout</p>
+            <p></p>
+            <p class="fragment">Recommandée pour la dislexie</p>
+            <p class="fragment">Favorise la mémorisation de contenus (étude réalisée à Chesterfield 2011)</p>
+          </section>
+          <section>
+            <h2>Woff</h2>
+            <p class="fragment">Web Open Font Format</p>
+            <p class="fragment">Version 1.0 (2009) <span class="fragment"> par Mozilla, Microsoft et Opera</span></p>
+            <p class="fragment">Version 2.0 (2013) <span class="fragment"> par Google</span></p>
+          </section>
+          <section>
+            <h3>
+              CSS3
+            </h3>
+            <p>Effets de texte qui mettent le <span class="fire">f</span>&nbsp;<span class="fire">e</span>&nbsp;<span class="fire">u</span></p>
+          </section>
+          <section>
+            <h3>Icon Fonts</h3>
+            <p class="fragment">Font Awesome</p>
+            <img class="fragment no-border" src="font-awesome.png" />
+          </section>
+          <section>
+            <h3>Icon Fonts</h3>
+            <p class="fragment">Au début avec un caractère par icône</p>
+            <pre class="fragment"><code>
+              @font-face {
+                font-family: MyIconFont;
+                src: url("/url/my_icon_font.ttf")
+              }
+
+              .icon-twitter::before {
+                font-family: MyIconFont;
+                content: 't';
+              }
+              
+              &lt;i class="icon-twitter"&gt;&lt;/i&gt;Twitter
+            </code></pre>
+            <p><i class="fab fa-twitter"></i> Twitter</p>
+          </section>
+          <section>
+            <pre><code data-trim data-noescape>
+              &lt;link 
+                href="https://fonts.googleapis.com/icon?family=Material+Icons" 
+                rel="stylesheet"&gt;
+              &lt;span class="material-icons"&gt;face&lt;/span&gt;
+            </code></pre>
+            <p>
+              <span class="material-icons" style="font-family: 'Material Icons' !important;">face</span>
+            </p>
+          </section>
+          <section>
+            <h3>Ligatures</h3>
+            <img src="ligatures.png"/>
+          </section>
+          <section>
+            <h3>Variable Fonts (2016)</h3>
+            <p>proposé par Adobe, Apple, Google et Microsoft</p>
+            <p class="fragment">Exemple : <a href='https://v-fonts.com/fonts/league-spartan-variable' target='_blank'>League Spartan</a></p>
+            <p class="fragment">Peut servir à plein d'autre choses (<a href="https://v-fonts.com/fonts/whoa" target='_blank'>exemple 1</a> / <a href="https://v-fonts.com/fonts/cheee-variable" target='_blank'>exemple 2</a> / <a href="https://v-fonts.com/fonts/variable-poo-demo" target='_blank'>exemple 3</a>)</p>
+          </section>
+          <section>
+            <h2>Timeline</h2>
+            <img src="timeline_fonts.png" class="no-border" />
+          </section>
+          <section>
+            <h3>Approfondir le sujet</h3>
+            <p>
+              Slides :
+              <a style="font-size: smaller;" href="https://speakerdeck.com/goetter/lepopee-des-polices-web-de-comic-sans-aux-variable-fonts"
+                >https://speakerdeck.com/goetter/lepopee-des-polices-web-de-comic-sans-aux-variable-fonts
+              </a>
+            </p>
+            <p>
+              Vidéo :
+              <a style="font-size: smaller;" href="https://www.youtube.com/watch?v=PaHrqhbsuzs">https://www.youtube.com/watch?v=PaHrqhbsuzs</a>
+            </p>
+          </section>
         </section>
+
         <section>
           <h2>Merci</h2>
           <div style="display:flex; flex-direction: row; align-content: space-between; align-items: center;">
